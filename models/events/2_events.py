@@ -18,7 +18,7 @@ class Category(DateMixin):
     """Eine Kategorie für einen Event."""
     name = models.CharField(max_length=100, unique=True)
     sub_title = models.CharField(max_length=200, null=True, blank=True)
-    slug = models.SlugField(blank=True, unique=True)
+    slug = models.SlugField(unique=True)
     description = models.TextField(null=True, blank=True)
 
     class Meta:

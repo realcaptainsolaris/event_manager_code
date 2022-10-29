@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
+from django.utils import timezone
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -69,3 +70,21 @@ class Event(DateMixin):
         if not self.slug:
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
+
+    @property
+    def related_events(self):
+        """
+        Ähnliche Events aus der gleichen Kategorie und der selben 
+        min-group. 
+        """
+        number = 5
+        related_events = Event.objects.filter(
+            min_group__exact=self.min_group, category=self.category
+        )
+        return related_events.exclude(pk=self.id)[:number]
+
+    @property
+    def has_finished(self) -> bool:
+        """Wenn das Event in der Vergangenheit liegt, return True."""
+        now = timezone.now()
+        return self.date <= now
