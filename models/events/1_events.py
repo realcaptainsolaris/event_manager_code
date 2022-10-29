@@ -21,7 +21,7 @@ class Category(DateMixin):
 
 
 class Event(DateMixin):
-
+    """Der Event, der auf einen bestimmten Zeitpunkt terminiert ist."""
     name = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
     date = models.DateTimeField()
@@ -29,7 +29,6 @@ class Event(DateMixin):
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name="events"
     )
-
     is_active = models.BooleanField(default=True)
 
     class Meta:
