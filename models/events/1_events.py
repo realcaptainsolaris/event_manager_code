@@ -18,3 +18,23 @@ class Category(DateMixin):
 
     def __str__(self):
         return self.name
+
+
+class Event(DateMixin):
+
+    name = models.CharField(max_length=100)
+    description = models.TextField(null=True, blank=True)
+    date = models.DateTimeField()
+    sub_title = models.CharField(max_length=200, null=True, blank=True)
+    category = models.ForeignKey(
+        Category, on_delete=models.CASCADE, related_name="events"
+    )
+
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ["name"]
+        verbose_name_plural = "Events"
+
+    def __str__(self):
+        return self.name
