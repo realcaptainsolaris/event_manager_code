@@ -23,6 +23,8 @@ class Category(DateMixin):
 
     class Meta:
         ordering = ["name"]
+        verbose_name = "Kategorie"
+        verbose_name_plural = "Kategorien"
 
     def save(self, *args, **kwargs):
         if not self.slug:
