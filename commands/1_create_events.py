@@ -44,7 +44,8 @@ class Command(BaseCommand):
             n := options.get("categories")) else CATEGORIES
 
         if any([num_events < 0,
-                0 < num_categories <= 10
+                num_categories < 0,
+                num_categories > 10
                 ]):
             raise ValueError(("Negative Werte nicht erlaubt. Nur maximal 10"
                              " Kategorien"))
@@ -60,7 +61,7 @@ class Command(BaseCommand):
             raise SystemExit(1)
 
         print("Lösche Model Data...")
-        for m in [Review, Event, Category]:
+        for m in [Event, Category]:
             m.objects.all().delete()
 
         print("Erstelle Kategorien...")
