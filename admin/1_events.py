@@ -7,7 +7,7 @@ class EventAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     search_fields = ["name"]
     list_filter = ("category",)
-    list_display = "slug", "author", "name", "category"
+    list_display = "slug", "author", "name", "category", "is_active"
 
 
 @admin.register(Category)

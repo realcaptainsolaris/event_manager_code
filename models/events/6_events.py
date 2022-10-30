@@ -92,6 +92,7 @@ class Event(DateMixin):
 
 class Review(DateMixin):
     """Ein Review für einen Event."""
+
     class Ratings(models.IntegerChoices):
         BAD = 1
         OK = 2
@@ -103,7 +104,6 @@ class Review(DateMixin):
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="reviews"
     )
-
     review = models.TextField(blank=True, null=True)
     rating = models.PositiveIntegerField(
         choices=Ratings.choices,
