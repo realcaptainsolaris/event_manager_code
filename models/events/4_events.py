@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.utils.text import slugify
 from django.utils import timezone
 from django.contrib.auth import get_user_model
+from event_manager.utils import slugify_instance_name
 
 User = get_user_model()
 
@@ -88,3 +89,10 @@ class Event(DateMixin):
         """Wenn das Event in der Vergangenheit liegt, return True."""
         now = timezone.now()
         return self.date <= now
+
+
+@receiver(pre_save, sender=Event)
+def create_slug(sender, instance, *args, **kwargs):
+    print("pre save wurde ausgeführt")
+    if not instance.slug:
+        instance.slug = slugify_instance_name(instance, new_slug=None)
