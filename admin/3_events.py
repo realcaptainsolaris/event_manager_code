@@ -44,26 +44,6 @@ class EventAdmin(admin.ModelAdmin):
     def category_slug(self, obj):
         return obj.category.slug
 
-    def get_queryset(self, request):
-        """Only superusers can see all events."""
-        qs = super(EventAdmin, self).get_queryset(request)
-        if request.user.is_superuser:
-            return qs
-        if request.user.groups.filter(name="Moderators").exists():
-            return qs
-        return qs.filter(author=request.user)
-
-    def get_readonly_fields(self, request, obj=None):
-        if request.user.is_staff:
-            if request.user.is_superuser:
-                return []
-            else:
-                return [
-                    f.name
-                    for f in self.model._meta.fields
-                    if f.name not in ["slug", "name"]
-                ]
-
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):

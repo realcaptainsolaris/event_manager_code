@@ -2,7 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 from django.contrib.auth import get_user_model
-from event_manager.uitls import slugify_instance_name
+from event_manager.utils import slugify_instance_name
 
 
 User = get_user_model()
