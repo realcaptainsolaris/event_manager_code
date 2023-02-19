@@ -1,9 +1,7 @@
 from django.db import models
 from django.urls import reverse
-from django.utils.text import slugify
 from django.utils import timezone
 from django.contrib.auth import get_user_model
-from event_manager.utils import slugify_instance_name
 
 User = get_user_model()
 
@@ -18,9 +16,9 @@ class DateMixin(models.Model):
 
 class Category(DateMixin):
     """Eine Kategorie für einen Event."""
+
     name = models.CharField(max_length=100, unique=True)
     sub_title = models.CharField(max_length=200, null=True, blank=True)
-    slug = models.SlugField(unique=True)
     description = models.TextField(null=True, blank=True)
 
     class Meta:
@@ -30,11 +28,6 @@ class Category(DateMixin):
 
     def __str__(self):
         return self.name
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
-        super().save(*args, **kwargs)
 
 
 class Event(DateMixin):
@@ -50,16 +43,13 @@ class Event(DateMixin):
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField(null=True, blank=True)
     date = models.DateTimeField()
-    slug = models.SlugField(unique=True)
     sub_title = models.CharField(max_length=200, null=True, blank=True)
     is_active = models.BooleanField(default=True)
     min_group = models.IntegerField(choices=Group.choices)
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name="events"
     )
-    author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="events"
-    )
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="events")
 
     class Meta:
         ordering = ["name"]
@@ -67,16 +57,11 @@ class Event(DateMixin):
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
-        super().save(*args, **kwargs)
-
     @property
     def related_events(self):
         """
-        Ähnliche Events aus der gleichen Kategorie und der selben 
-        min-group. 
+        Ähnliche Events aus der gleichen Kategorie und der selben
+        min-group.
         """
         number = 5
         related_events = Event.objects.filter(
@@ -89,10 +74,3 @@ class Event(DateMixin):
         """Wenn das Event in der Vergangenheit liegt, return True."""
         now = timezone.now()
         return self.date <= now
-
-
-@receiver(pre_save, sender=Event)
-def create_slug(sender, instance, *args, **kwargs):
-    print("pre save wurde ausgeführt")
-    if not instance.slug:
-        instance.slug = slugify_instance_name(instance, new_slug=None)

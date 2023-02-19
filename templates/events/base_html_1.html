@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}
+<html lang='{{ LANGUAGE_CODE }}'>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="author" content="">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+<h1>{% block head %}{% endblock %}</h1>
+
+<div>
+{% block content %}
+{% endblock %}
+</div>
+
+</body>
+
+</html>

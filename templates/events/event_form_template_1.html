@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Event eintragen
+{%endblock%}
+
+{% block head %}
+  Event eintragen
+{%endblock%}
+
+{% block content %}
+<a href="{% url 'events:events' %}">zurück zur Übersicht</a><br>
+
+<form method="POST">
+    {% csrf_token %}
+        {{form|crispy}}
+        <div>
+        <input class="btn btn-primary" type="submit" value="Jetzt eintragen" />
+        </div>
+</form>
+
+{% endblock %}

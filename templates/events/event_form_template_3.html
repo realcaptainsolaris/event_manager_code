@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{% if object %}
+    Event {{object.name}} updaten
+{% else %}
+    Event eintragen
+{% endif %}
+{%endblock%}
+
+{% block head %}
+{% if object %}
+    Event {{object.name}} updaten
+{% else %}
+    Event eintragen
+{% endif %}
+{%endblock%}
+
+{% block content %}
+<a href="{% url 'events:events' %}">zurück zur Übersicht</a><br>
+
+<form method="POST">
+    {% csrf_token %}
+        {{form|crispy}}
+        <div>
+        {% if object %}
+        <input class="btn btn-primary" type="submit" value="Jetzt updaten" />
+        {% else %}
+        <input class="btn btn-primary" type="submit" value="Jetzt eintragen" />
+        {% endif %}
+        </div>
+</form>
+
+{% endblock %}

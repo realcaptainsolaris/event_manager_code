@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Event: {{object.name}}
+{%endblock%}
+
+{% block head %}
+{{object.name}}
+{%endblock%}
+
+{% block content %}
+<h1>{{object.name}}</h1>
+<p>{{object.sub_title}}</p>
+<p>Category: {{object.category}}</p>
+
+<h3>Beschreibung</h3>
+<p>{{object.description}}</p>
+<p>findet statt am: {{object.date}}</p>
+<p>created at: {{object.created_at}}</p>
+
+{% if object.related_events %}
+<h4>Ähnliche Events</h4>
+<ul>
+  {% for related in object.related_events %}
+    <li>{{related.name}}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+{%endblock%}
