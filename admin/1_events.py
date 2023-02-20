@@ -11,7 +11,6 @@ class EventAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    search_fields = ["name"]
     list_display = "id", "name", "sub_title"
     list_display_links = ("name", "sub_title")
     list_filter = ("events", "sub_title")
