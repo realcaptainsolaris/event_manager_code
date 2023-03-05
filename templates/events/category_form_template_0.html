@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head%}
+<h1>neue Kategorie hinzufügen</h1>
+{% endblock %}
+
+{% block content %}
+    <a href="">zurück zur Übersicht</a><br>
+
+    <form method="POST">
+    {% csrf_token %}
+    <table>
+    {{form}}
+    <tr>
+        <th>
+            Formular absenden:
+        </th>
+        <td>
+            <input type="submit" value="Jetzt eintragen" />
+        </td>
+    </tr>
+    </table>
+    </form>
+
+{% endblock %}
