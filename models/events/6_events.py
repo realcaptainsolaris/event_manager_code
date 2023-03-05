@@ -19,6 +19,7 @@ class DateMixin(models.Model):
 
 class Category(DateMixin):
     """Eine Kategorie für einen Event."""
+
     name = models.CharField(max_length=100, unique=True)
     sub_title = models.CharField(max_length=200, null=True, blank=True)
     slug = models.SlugField(unique=True)
@@ -36,6 +37,10 @@ class Category(DateMixin):
         if not self.slug:
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
+
+    def num_of_events(self):
+        """Die Anzahl der Events einer Kategorie."""
+        return self.events.count()
 
 
 class Event(DateMixin):
@@ -58,9 +63,7 @@ class Event(DateMixin):
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name="events"
     )
-    author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="events"
-    )
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="events")
 
     class Meta:
         ordering = ["name"]
@@ -76,8 +79,8 @@ class Event(DateMixin):
     @property
     def related_events(self):
         """
-        Ähnliche Events aus der gleichen Kategorie und der selben 
-        min-group. 
+        Ähnliche Events aus der gleichen Kategorie und der selben
+        min-group.
         """
         number = 5
         related_events = Event.objects.filter(
@@ -103,16 +106,12 @@ class Review(DateMixin):
         WONDERFUL = 5
         AWESOME = 6
 
-    author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="reviews"
-    )
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reviews")
     review = models.TextField(blank=True, null=True)
     rating = models.PositiveIntegerField(
         choices=Ratings.choices,
     )
-    event = models.ForeignKey(
-        Event, on_delete=models.CASCADE, related_name="reviews"
-    )
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="reviews")
 
     def __str__(self):
         return f"{self.event.name}: {self.rating},  {self.author}"

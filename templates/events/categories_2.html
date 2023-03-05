@@ -15,7 +15,7 @@
 <ul class="list-group event_box">
 {% for cat in categories %}
 
-<a href="{% url 'events:category_detail' cat.slug %}">
+<a href="{% url 'events:category_detail' cat.pk %}">
 <li class="list-group-item rounded">
     {{cat.name}}
     <span class="badge rounded-pill bg-primary">{{cat.num_of_events}}</span>
