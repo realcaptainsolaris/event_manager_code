@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Übersicht der Kategorien
+{% endblock %}
+
+{% block head %}
+<h1 class="display-6 fw-bold lh-1">Kategorien</h1>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+<div class="col-lg-8 col-sm-12">
+
+<ul class="list-group event_box">
+{% for cat in categories %}
+
+<a href="{% url 'events:category_detail' cat.slug %}">
+<li class="list-group-item rounded">
+    {{cat.name}}
+    <span class="badge rounded-pill bg-primary">{{cat.num_of_events}}</span>
+</li>
+</a>
+{% endfor %}
+</ul>
+
+<p>
+<a href="{% url 'events:category_create' %}">neue Kategorie hinzufügen</a>
+</p>
+</div>
+</div>
+{% endblock %}

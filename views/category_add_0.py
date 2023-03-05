@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, render, reverse
+from django.shortcuts import get_object_or_404, render, reverse, redirect
 from .forms import CategoryForm
 
 
