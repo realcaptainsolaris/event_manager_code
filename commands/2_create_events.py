@@ -6,7 +6,6 @@ event data built with factory boy and the faker libary.
 """
 
 import random
-import factory
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 from django.db import transaction
@@ -41,6 +40,10 @@ class Command(BaseCommand):
             type=int,
             help='Number of categories to be generated, max is 10',
         )
+        parser.epilog = (
+            "Usage example: python manage.py create_events events=100 "
+            "categories=10"
+        )
 
     @transaction.atomic
     def handle(self, *args, **options):
@@ -70,10 +73,7 @@ class Command(BaseCommand):
             m.objects.all().delete()
 
         print("Erstelle Kategorien...")
-        categories = []
-        for _ in range(num_categories):
-            c = CategoryFactory()
-            categories.append(c)
+        categories = CategoryFactory.create_batch(num_categories)
 
         print("Erstelle Events...")
         for _ in range(num_events):

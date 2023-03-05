@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load i18n %}
 {% load static %}
 {% get_current_language as LANGUAGE_CODE %}
 <html lang='{{ LANGUAGE_CODE }}' class="h-100">
@@ -34,7 +35,7 @@
                   text-white">Kategorien</a></li>
         </ul>
 
-        <form action="{% url 'events:event_search' %}" method="get" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+        <form action="{% url 'events:categories' %}" method="get" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
           <input name="q" required="required" type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
         </form>
 
@@ -49,35 +50,42 @@
           <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
             <li><a class="dropdown-item" href="#">Event anlegen</a></li>
 
-            <!-- das Freischalten, wenn der Login und Signup implementiert wird -->
-            <!--
+            {% comment %} 
+            <!-- PASSWORD CHANGE: Freischalten, wenn der Login und Signup implementiert wird -->
             <li><a class="dropdown-item" href="{% url 'password_change' %}">Passwort ändern</a></li>
-            -->
+            {% endcomment %}
             <li><a class="dropdown-item" href="">Passwort ändern</a></li>
             <li><hr class="dropdown-divider"></li>
 
-            <!-- das Freischalten, wenn der Login und Signup implementiert wird -->
-            <!--
+            {% comment %} 
+            <!-- LOGOUT: Freischalten, wenn der Login und Signup implementiert wird -->
             <li>
               <a class="dropdown-item" href="{% url 'logout' %}">Sign out</a>
             </li>
-            -->
+            {% endcomment %}
             <li>
               <a class="dropdown-item" href="">Sign out</a>
             </li>
+
           </ul>
         </div>
 
           {% else %}
 
+          {% comment %} 
           <!-- das Freischalten, wenn der Login und Signup implementiert wird -->
-          <!-- <a href="{% url 'login' %}"> -->
+          <a href="{% url 'login' %}">
+          <button type="button" class="btn btn-outline-light me-2">Login</button>
+          </a>
+          {% endcomment %}
           <a href="">
           <button type="button" class="btn btn-outline-light me-2">Login</button>
           </a>
 
+          {% comment %} 
           <!-- das Freischalten, wenn der Login und Signup implementiert wird -->
-          <!-- <a href="{% url 'user:signup' %}" > -->
+          <a href="{% url 'user:signup' %}">
+          {% endcomment %}
           <a href="">
           <button type="button" class="btn btn-warning">Sign-up</button>
           </a>
@@ -122,3 +130,21 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
