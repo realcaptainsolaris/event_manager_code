@@ -1,0 +1,26 @@
+% extends 'base.html' %}
+
+{% block head%}
+<h1 class="display-6 fw-bold lh-1">Kategorie bearbeiten</h1>
+{% endblock %}
+
+
+{% block content %}
+<a href="{% url 'events:categories' %}">zurück zur Übersicht</a><br>
+
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        {{form}}
+        <tr>
+            <th>
+                Formular absenden:
+            </th>
+            <td>
+                <input class="btn btn-primary" type="submit" value="Jetzt eintragen" />
+            </td>
+        </tr>
+    </table>
+</form>
+
+{% endblock %}

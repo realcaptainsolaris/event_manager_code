@@ -9,6 +9,6 @@ def category_update(request, pk):
 
     return render(
         request,
-        "events/category_add.html",
+        "events/category_update.html",
         {"form": form},
     )
