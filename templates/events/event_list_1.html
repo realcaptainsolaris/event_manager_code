@@ -1,25 +1,32 @@
-  {% extends 'base.html' %}
+{% extends 'base.html' %}
 
-  {% block title %}
-  Übersicht der Events
-  {%endblock%}
+{% block head%}
+<h1 class="display-6 fw-bold lh-1">{% trans 'EventsOverview' %}</h1>
 
-  {% block head %}
-  Übersicht der Events
-  {%endblock%}
+{%if search_by_category %}
+   in der Kategorie {{search_by_category}}
+{% endif %}
+
+{%if search_by_user %}
+   von User {{search_by_user}}
+{% endif %}
+
+<p>Tolle Events und Aktivitäten!</p>
+{% endblock %}
 
 {% block content %}
 
 <ul class="list-group event_box">
 {% for event in object_list %}
+    <a href="{% url 'events:event_detail' event.pk %}">
 
-  <li class="list-group-item rounded">
+    <li class="list-group-item rounded">
+    <small><span>am {{event.date}}</span></small><br>
     <b>{{event.name}}</b>
-    <span class="badge rounded-pill bg-primary">
-      {{event.category.name}}
-    </span>
-  </li>
-
+        <span class="badge rounded-pill bg-primary">{{event.category.name}}</span>
+        <p>by {{event.author}}</p>
+    </li>
+    </a>
 {% endfor%}
 </ul>
 
