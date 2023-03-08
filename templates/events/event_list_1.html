@@ -1,16 +1,11 @@
 {% extends 'base.html' %}
 
+{% block title %}
+Event Übersicht
+{% endblock %}
+
 {% block head%}
-<h1 class="display-6 fw-bold lh-1">{% trans 'EventsOverview' %}</h1>
-
-{%if search_by_category %}
-   in der Kategorie {{search_by_category}}
-{% endif %}
-
-{%if search_by_user %}
-   von User {{search_by_user}}
-{% endif %}
-
+<h1 class="display-6 fw-bold lh-1">Event Übersicht</h1>
 <p>Tolle Events und Aktivitäten!</p>
 {% endblock %}
 
