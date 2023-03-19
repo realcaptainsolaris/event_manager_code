@@ -5,7 +5,7 @@ def category_update(request, pk):
 
     if form.is_valid():
         category = form.save()
-        return (redirect("events:category_detail", kwargs={"id": self.category.id}),)
+        return redirect("events:category_detail", kwargs={"id": self.category.id})
 
     return render(
         request,

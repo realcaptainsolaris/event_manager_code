@@ -1,5 +1,7 @@
 from django.shortcuts import get_object_or_404, render, reverse, redirect
 from .forms import CategoryForm
+from .models import Event, Category
+from .forms import CategoryForm
 
 
 def category_create(request):
