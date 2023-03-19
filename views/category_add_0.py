@@ -5,14 +5,16 @@ from .forms import CategoryForm
 
 
 def category_create(request):
-    """Eine View zum Hinzufügen einer Kategorie."""
+    """Eine View zum Hinzufügen einer Kategorie.
+
+    http://127.0.0.1:8000/events/category/create
+
+    """
     if request.method == "POST":
-        form = CategoryForm(request.POST)
+        form = CategoryForm(request.POST or None)
         if form.is_valid():
             category = form.save()
-            return (
-                redirect("events:category_detail", kwargs={"id": self.category.id}),
-            )
+            return redirect("events:category_detail", pk=category.pk)
     else:
         form = CategoryForm()
     return render(
