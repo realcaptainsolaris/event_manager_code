@@ -17,6 +17,6 @@ def category_create(request):
         form = CategoryForm()
     return render(
         request,
-        "events/category_add.html",
+        "events/category_create.html",
         {"form": form},
     )
