@@ -16,10 +16,12 @@ in <a href="{% url 'events:category_detail' object.category.pk %}">
 {{object.category}}</a>
 </p>
 
-{% if user.is_authenticated and user == object.author or True %}
+{% if user.is_authenticated and user == object.author %}
 <span style="font-size:12px;">
 <a href="{% url 'events:event_update' object.id %}">editieren</a> |
+{% comment %}
 <a href="{% url 'events:event_delete' object.id %}">löschen</a>
+{% endcomment %}
 </span>
 {% endif %}
 
