@@ -6,13 +6,13 @@ Kategorie bearbeiten
 
 
 {% block head%}
+<a href="{% url 'events:categories' %}">zurück zur Übersicht</a><br>
+
 <h1 class="display-6 fw-bold lh-1">Kategorie bearbeiten</h1>
 {% endblock %}
 
 
 {% block content %}
-<a href="{% url 'events:categories' %}">zurück zur Übersicht</a><br>
-
 <form method="POST">
     {% csrf_token %}
     <table>

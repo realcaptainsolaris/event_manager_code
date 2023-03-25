@@ -11,9 +11,19 @@
 
 {% block head %}
 {% if object %}
-    <h1 class="display-6 fw-bold lh-1">Event {{object.name}}</h1>
+    <p>
+    <a href="{% url 'events:event_detail' object.pk %}">zurück zum Event</a><br>
+    </p>
+
+    <h1 class="display-6 fw-bold lh-1">{{object.name}}</h1>
+    
 {% else %}
+    <p>
+    <a href="{% url 'events:events' %}">zurück zur Übersicht</a><br>
+    </p>
+
     <h1 class="display-6 fw-bold lh-1">Event eintragen</h1>
+    
 {% endif %}
 {%endblock%}
 
@@ -21,10 +31,6 @@
 <div class="container">
 <div class="row">
 <div class="col-lg-8 col-md-12 mb-5">
-
-<p>
-<a href="{% url 'events:events' %}">zurück zur Übersicht</a><br>
-</p>
 
 {% crispy form form.helper %}
         
