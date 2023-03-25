@@ -38,7 +38,7 @@
     {% for e in category.show %}
         <li><a href="{{e.get_absolute_url}}">{{e.name}}</a></li>
     {% empty %}
-        <li>Not in</li>
+        <li>In dieser Kategorie sind keine Events vorhanden.</li>
     {% endfor %}
     </ul>
 

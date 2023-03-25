@@ -6,6 +6,9 @@
 
 
 {% block head %}
+<p>
+    <a href="{% url 'events:events' %}">zurück zur Übersicht aller Events</a><br>
+</p>
 
 <h1 class="display-6 fw-bold lh-1">{{object}}</h1>
 <h3 class="display-6 lh-3">{{object.sub_title}}</h3>
