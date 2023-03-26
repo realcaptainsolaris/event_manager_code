@@ -32,10 +32,15 @@ in <a href="{% url 'events:category_detail' object.category.pk %}">
 <div class="container">
 <div class="col-lg-8 col-sm-12">
 
+
+<div class="mb-1 mt-1">
+{% for tag in object.tags.all %}
+    <span class="badge rounded-pill bg-primary">{{tag}}</span>
+  {% endfor %}
+</div>
+
     <h3>Beschreibung</h3>
     <p>{{object.description}}</p>
-
-
 
 <section class="mb-5 mt-5">
     <h3>zusätzliche Infos</h3>
