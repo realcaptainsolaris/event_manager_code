@@ -9,7 +9,6 @@ environ.Env.read_env(BASE_DIR / ".env")
 
 DEBUG = env("DEBUG")
 SECRET_KEY = env("SECRET_KEY")
-LOG_LEVEL = env("LOG_LEVEL")
 
 INSTALLED_APPS = [
     "user",
@@ -85,6 +84,9 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = ("bootstrap5",)
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
+MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = "/media/"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
