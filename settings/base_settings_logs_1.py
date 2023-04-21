@@ -29,7 +29,7 @@ LOGGING = {
             "level": "INFO",
             "propagate": False,
         },
-        "events": {
+        "eventmanager.events": {
             "handlers": ["django_log"],
             "level": "WARNING",
             "propagate": False,

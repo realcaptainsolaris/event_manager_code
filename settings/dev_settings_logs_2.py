@@ -10,7 +10,7 @@ LOGGING["handlers"].update({
 })
 
 LOGGING["loggers"].update({
-    "events": {
+    "eventmanager.events": {
         "handlers": ["django_log", "console", "djdt_log"],
         "level": "DEBUG",
         "propagate": False,
