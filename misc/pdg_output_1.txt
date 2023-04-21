@@ -1,0 +1,54 @@
+> d: \event_manager\events\views.py(36)list_categories()
+-> categories = Category.objects.all()
+(Pdb) categories
+*** NameError: name 'categories' is not defined
+(Pdb) n
+> d: \win\stuff\web\django_educational_projects\event_manager\events\views.py(38)list_categories()
+-> return render(
+(Pdb) categories
+< QuerySet [ < Category: Freizeit > , < Category: Kochen > , < Category: Sport > , < Category: Talk > ] >
+(Pdb) ll
+ 32 def list_categories(request):
+ 33 print("verwendete HTTP-Methode: ", request.method)
+ 34         logger.debug("Ochse")
+ 35         breakpoint()
+ 36         categories=Category.objects.all()
+ 37
+ 38 -> return render(
+ 39             request,
+ 40             "events/category_list_simple.html",
+ 41             {"categories": categories},
+ 42)
+(Pdb) n
+> d: \win\stuff\web\django_educational_projects\event_manager\events\views.py(39)list_categories()
+-> request,
+(Pdb) ll
+ 32 def list_categories(request):
+ 33 print("verwendete HTTP-Methode: ", request.method)
+ 34         logger.debug("Ochse")
+ 35         breakpoint()
+ 36         categories=Category.objects.all()
+ 37
+ 38 return render(
+ 39 -> request,
+ 40             "events/category_list_simple.html",
+ 41             {"categories": categories},
+ 42)
+(Pdb) n
+> d: \win\stuff\web\django_educational_projects\event_manager\events\views.py(40)list_categories()
+-> "events/category_list_simple.html",
+(Pdb) request
+< WSGIRequest: GET '/events/categories/' >
+(Pdb) ll
+ 32 def list_categories(request):
+ 33 print("verwendete HTTP-Methode: ", request.method)
+ 34         logger.debug("Ochse")
+ 35         breakpoint()
+ 36         categories=Category.objects.all()
+ 37
+ 38 return render(
+ 39             request,
+ 40 -> "events/category_list_simple.html",
+ 41             {"categories": categories},
+ 42)
+(Pdb)
