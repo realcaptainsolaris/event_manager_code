@@ -60,7 +60,12 @@
             {% comment %} 
             <!-- LOGOUT: Freischalten, wenn der Login und Signup implementiert wird -->
             <li>
-              <a class="dropdown-item" href="{% url 'logout' %}">Sign out</a>
+                <!-- ab django 4.2 ist kein logout per GET mehr erlaubt! -->
+                <form method="POST" 
+                      action="{% url 'logout' %}">
+                        {% csrf_token %}
+                      <button class="dropdown-item">Sign out</button>
+                </form>
             </li>
             {% endcomment %}
             <li>
