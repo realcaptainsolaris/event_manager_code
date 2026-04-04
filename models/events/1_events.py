@@ -14,7 +14,7 @@ class DateMixin(models.Model):
 class Category(DateMixin):
     """Eine Kategorie für einen Event."""
 
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
     sub_title = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
 

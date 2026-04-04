@@ -11,21 +11,22 @@ Kategorie bearbeiten
 <h1 class="display-6 fw-bold lh-1">Kategorie bearbeiten</h1>
 {% endblock %}
 
-
 {% block content %}
-<form method="POST">
-    {% csrf_token %}
-    <table>
-        {{form}}
-        <tr>
-            <th>
-                Formular absenden:
-            </th>
-            <td>
-                <input class="btn btn-primary" type="submit" value="Jetzt eintragen" />
-            </td>
-        </tr>
-    </table>
-</form>
+
+<div class="container mt-4">
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            {{ form }}
+        </div>
+
+        <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary">
+                Jetzt eintragen
+            </button>
+        </div>
+    </form>
+</div>
 
 {% endblock %}

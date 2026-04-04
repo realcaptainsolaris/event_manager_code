@@ -33,11 +33,11 @@ class Event(DateMixin):
     """Der Event, der auf einen bestimmten Zeitpunkt terminiert ist."""
 
     class Group(models.IntegerChoices):
-        SMALL = 2
-        MEDIUM = 5
-        BIG = 10
-        LARGE = 20
-        UNLIMITED = 0
+        SMALL = 2, "kleine Gruppe"
+        MEDIUM = 5, "mittelgroße Gruppe"
+        BIG = 10, "große Gruppe"
+        LARGE = 20, "sehr große Gruppe"
+        UNLIMITED = 0, "ohne Begrenzung"
 
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField(null=True, blank=True)
@@ -56,17 +56,16 @@ class Event(DateMixin):
     def __str__(self):
         return self.name
 
-    @property
     def related_events(self):
         """
         Ähnliche Events aus der gleichen Kategorie und der selben
         min-group.
         """
-        number = 5
         related_events = Event.objects.filter(
-            min_group__exact=self.min_group, category=self.category
+            min_group=self.min_group,
+            category=self.category,
         )
-        return related_events.exclude(pk=self.id)[:number]
+        return related_events.exclude(pk=self.id)
 
     @property
     def has_finished(self) -> bool:

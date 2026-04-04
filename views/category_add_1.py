@@ -1,11 +1,13 @@
-from django.shortcuts import get_object_or_404, render, reverse, redirect
-from .forms import CategoryForm
-from .models import Event, Category
+from django.shortcuts import render, redirect
 from .forms import CategoryForm
 
 
 def category_create(request):
-    """Eine View zum Hinzufügen einer Kategorie."""
+    """
+    Eine View zum Hinzufügen einer Kategorie.
+
+    events/category/create
+    """
     if request.method == "POST":
         form = CategoryForm(request.POST)
         if form.is_valid():

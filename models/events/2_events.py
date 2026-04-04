@@ -31,11 +31,11 @@ class Event(DateMixin):
     """Der Event, der auf einen bestimmten Zeitpunkt terminiert ist."""
 
     class Group(models.IntegerChoices):
-        SMALL = 2
-        MEDIUM = 5
-        BIG = 10
-        LARGE = 20
-        UNLIMITED = 0
+        SMALL = 2, "kleine Gruppe"
+        MEDIUM = 5, "mittelgroße Gruppe"
+        BIG = 10, "große Gruppe"
+        LARGE = 20, "sehr große Gruppe"
+        UNLIMITED = 0, "ohne Begrenzung"
 
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField(null=True, blank=True)
