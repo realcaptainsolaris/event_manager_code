@@ -6,4 +6,4 @@ class EventListView(ListView):
     """
 
     model = Event
-    context_object_name = "events"
+    template_name = "events/event_liste.html"
