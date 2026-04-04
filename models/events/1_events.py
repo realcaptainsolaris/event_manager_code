@@ -3,6 +3,7 @@ from django.db import models
 
 class DateMixin(models.Model):
     """eine abstrakte Klasse, die selbst keine DB-Tabelle erstellt"""
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -12,7 +13,8 @@ class DateMixin(models.Model):
 
 class Category(DateMixin):
     """Eine Kategorie für einen Event."""
-    name = models.CharField(max_length=100)
+
+    name = models.CharField(max_length=100, unique=True)
     sub_title = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
 
@@ -22,6 +24,7 @@ class Category(DateMixin):
 
 class Event(DateMixin):
     """Der Event, der auf einen bestimmten Zeitpunkt terminiert ist."""
+
     name = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
     date = models.DateTimeField()

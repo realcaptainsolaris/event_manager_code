@@ -3,9 +3,10 @@ from django.db import models
 
 class Category(models.Model):
     """Eine Kategorie für einen Event."""
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     sub_title = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
 
@@ -15,6 +16,7 @@ class Category(models.Model):
 
 class Event(models.Model):
     """Der Event, der auf einen bestimmten Zeitpunkt terminiert ist."""
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=100)
