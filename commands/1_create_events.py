@@ -1,79 +1,68 @@
 """
-Generating Event Data.
+Erzeugen von Event-Daten
 
-This module provides a management command to generate random
-event data built with factory boy and the faker libary.
+Dieses Modul stellt ein Management-Kommando bereit, um zufällige Event-Daten zu generieren.
+Dabei werden ``factory_boy`` und die Bibliothek ``Faker`` verwendet.
 """
 
 import random
+
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
-from django.db import transaction
-from events.factories import CategoryFactory
-from events.factories import EventFactory
-from events.models import Category
-from events.models import Event
 
-
-CATEGORIES = 4
-EVENTS = 20
+from events.factories import CategoryFactory, EventFactory
+from events.models import Category, Event
 
 
 class Command(BaseCommand):
-
     def add_arguments(self, parser):
         parser.description = "Generate Random Events and Categories"
         parser.add_argument(
-            '-e',
-            '--events',
+            "-e",
+            "--events",
             type=int,
-            help='Number of events to be generated',
+            help="Number of events to be generated",
+            required=True,
         )
         parser.add_argument(
-            '-c',
-            '--categories',
+            "-c",
+            "--categories",
             type=int,
-            help='Number of categories to be generated, max is 10',
+            help="Number of categories to be generated, max is 10",
+            required=True,
         )
-        parser.epilog = (
-            "Usage example: python manage.py create_events events=100 "
-            "categories=10"
-        )
+        parser.epilog = "Usage example: python manage.py create_events -e 10 -c 3"
 
-    @transaction.atomic
     def handle(self, *args, **options):
-        num_events = n if (n := options.get("events")) else EVENTS
-        num_categories = n if (
-            n := options.get("categories")) else CATEGORIES
+        num_events: int = options["events"]
+        num_categories: int = options["categories"]
 
-        if any([num_events < 0,
-                num_categories < 0,
-                num_categories > 10
-                ]):
-            raise ValueError(("Negative Werte nicht erlaubt. Nur maximal 10"
-                             " Kategorien"))
+        if num_events < 0 or not 0 <= num_categories <= 10:
+            raise SystemExit(
+                "Nur nicht-negative Werte und maximal 10 Kategorien erlaubt."
+            )
 
-        print(
-            f"Generating {num_events=} {num_categories=} "
-        )
-        user_list = get_user_model().objects.all()
+        print(f"Generating events={num_events}, categories={num_categories}")
 
-        if not user_list:
-            print("Es existieren keine User im System.")
-            print("Bitte führe erst python manage.py set_testusers aus")
-            raise SystemExit(1)
+        User = get_user_model()
+        users = list(User.objects.all())
 
-        print("Lösche Model Data...")
-        for m in [Event, Category]:
-            m.objects.all().delete()
+        if not users:
+            raise SystemExit(
+                "Keine User vorhanden. Bitte zuerst: manage.py set_testusers"
+            )
+
+        print("Lösche vorhandene Daten...")
+        Event.objects.all().delete()
+        Category.objects.all().delete()
 
         print("Erstelle Kategorien...")
-
         categories = CategoryFactory.create_batch(num_categories)
 
         print("Erstelle Events...")
         for _ in range(num_events):
             event = EventFactory(
                 category=random.choice(categories),
-                author=random.choice(user_list),
+                author=random.choice(users),
             )
+            print(f"=> {event}")

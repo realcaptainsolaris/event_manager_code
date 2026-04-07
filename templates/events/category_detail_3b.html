@@ -4,7 +4,6 @@
 {{category.name}}
 {% endblock %}
 
-
 {% block head %}
 <p>
     <a href="{% url 'events:categories' %}">zurück zur Übersicht aller Kategorien</a><br>
@@ -27,10 +26,11 @@
 
     <p>{{category.description}}</p>
 
+    <!-- Diesen Block einfügen: -->
     <p>
-    <a href="{% url 'events:event_create' category.pk %}">
-    <button class="btn btn-primary">neues Event in {{category}} eintragen</button>
-    </a>
+        <a href="{% url 'events:event_create' category.pk %}" class="btn btn-primary">
+            Neues Event in {{ category }} eintragen
+        </a>
     </p>
 
 </div>

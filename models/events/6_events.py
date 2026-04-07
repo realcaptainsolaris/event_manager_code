@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils.text import slugify
 from django.utils import timezone
 from django.contrib.auth import get_user_model
@@ -40,6 +41,10 @@ class Category(DateMixin):
     def num_of_events(self):
         """Die Anzahl der Events einer Kategorie."""
         return self.events.count()
+
+    def get_absolute_url(self):
+        """Die URL für die Detailansicht einer Kategorie."""
+        return reverse("events:category_detail", args=[str(self.pk)])
 
 
 class Event(DateMixin):
@@ -86,6 +91,10 @@ class Event(DateMixin):
         """Wenn das Event in der Vergangenheit liegt, return True."""
         now = timezone.now()
         return self.date <= now
+
+    def get_absolute_url(self):
+        """Die URL für die Detailansicht eines Events."""
+        return reverse("events:event_detail", args=[str(self.pk)])
 
 
 class Review(DateMixin):

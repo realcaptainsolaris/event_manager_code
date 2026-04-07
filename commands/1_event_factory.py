@@ -1,13 +1,11 @@
 import random
 from datetime import timedelta
 
-import factory
-import faker
-from user.factories import UserFactory
-
 from django.contrib.auth import get_user_model
 from django.utils import timezone
+import factory
 
+from user.factories import UserFactory
 from . import models
 
 User = get_user_model()
@@ -27,15 +25,17 @@ categories = [
     "Religion",
 ]
 
+
 class CategoryFactory(factory.django.DjangoModelFactory):
     """Erstellt eine Kategorie aus einer vorgegebenen Liste."""
 
     class Meta:
         model = models.Category
+        django_get_or_create = ("name",)
 
     name = factory.Iterator(categories)
-    sub_title = factory.Faker("sentence", locale="de_DE")
-    description = factory.Faker("paragraph", nb_sentences=20, locale="de_DE")
+    sub_title = factory.Faker("sentence")
+    description = factory.Faker("paragraph", nb_sentences=20)
 
 
 class EventFactory(factory.django.DjangoModelFactory):
@@ -50,10 +50,9 @@ class EventFactory(factory.django.DjangoModelFactory):
     category = factory.SubFactory(CategoryFactory)
 
     name = factory.Faker("sentence")
-    sub_title = factory.Faker("sentence", locale="de_DE")
-    description = factory.Faker("paragraph", nb_sentences=20, locale="de_DE")
+    sub_title = factory.Faker("sentence")
+    description = factory.Faker("paragraph", nb_sentences=20)
     min_group = factory.LazyAttribute(lambda _: random.choice(list(models.Event.Group)))
-    is_active = factory.Faker("boolean", chance_of_getting_true=50)
 
     date = factory.Faker(
         "date_time_between",
@@ -61,4 +60,3 @@ class EventFactory(factory.django.DjangoModelFactory):
         start_date=timezone.now() + timedelta(days=1),
         tzinfo=timezone.get_current_timezone(),
     )
-

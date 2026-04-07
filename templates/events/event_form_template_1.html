@@ -14,20 +14,25 @@
 {%endblock%}
 
 {% block content %}
-<div class="container">
-<div class="row">
-<div class="col-lg-8 col-md-12 mb-5">
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-12 mb-5">
 
+            <form method="POST">
+                {% csrf_token %}
 
-<form method="POST">
-    {% csrf_token %}
-        {{form|crispy}}
-        <div>
-        <input class="btn btn-primary" type="submit" value="Jetzt eintragen" />
+                {{ form|crispy }}
+
+                <div class="mt-3 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">
+                        Jetzt eintragen
+                    </button>
+                </div>
+            </form>
+
         </div>
-</form>
-
-<div>
-</div>
+    </div>
 </div>
 {% endblock %}
+
+
