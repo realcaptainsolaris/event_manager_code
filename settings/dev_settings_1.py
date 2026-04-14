@@ -1,4 +1,7 @@
+# pyright: reportWildcardImportFromLibrary=false, reportUndefinedVariable=false
+# ruff: noqa: F403, F405
 from event_manager.settings.base import *
+
 
 # für Debug-Toolbar
 INTERNAL_IPS = ("127.0.0.1",)

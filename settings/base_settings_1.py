@@ -4,10 +4,10 @@ import environ
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-env = environ.Env(DEBUG=(bool, False))
+env = environ.Env()
 environ.Env.read_env(BASE_DIR / ".env")
 
-DEBUG = env("DEBUG")
+DEBUG = env.bool("DEBUG", default=False)
 SECRET_KEY = env("SECRET_KEY")
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
@@ -70,9 +70,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# https://docs.djangoproject.com/en/3.2/topics/i18n/
-LANGUAGE_CODE = "de"
-
 TIME_ZONE = "Europe/Berlin"
 USE_I18N = True
 USE_L10N = True
@@ -85,8 +82,6 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = ("bootstrap5",)
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
-MEDIA_ROOT = BASE_DIR / "media"
-MEDIA_URL = "/media/"
 
 
 # Default primary key field type
