@@ -1,6 +1,5 @@
 from django.db import models
 from django.urls import reverse
-from django.utils.text import slugify
 from django.utils import timezone
 from django.contrib.auth import get_user_model
 from event_manager.utils import slugify_instance_name
@@ -22,8 +21,8 @@ class Category(DateMixin):
 
     name = models.CharField(max_length=100, unique=True)
     sub_title = models.CharField(max_length=200, null=True, blank=True)
-    slug = models.SlugField(unique=True)
     description = models.TextField(null=True, blank=True)
+    image = models.ImageField(upload_to="documents/", blank=True, null=True)
 
     class Meta:
         ordering = ["name"]
@@ -32,11 +31,6 @@ class Category(DateMixin):
 
     def __str__(self):
         return self.name
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
-        super().save(*args, **kwargs)
 
     def num_of_events(self):
         """Die Anzahl der Events einer Kategorie."""

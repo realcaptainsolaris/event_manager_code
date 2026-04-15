@@ -13,7 +13,7 @@ class EventForm(forms.ModelForm):
     class Meta:
         model = Event
         fields = "__all__"
-        exclude = ("slug", "category", "author")
+        exclude = ("category", "author")
 
         widgets = {
             "date": forms.DateInput(
