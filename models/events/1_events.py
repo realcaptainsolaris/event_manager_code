@@ -18,7 +18,7 @@ class Category(DateMixin):
     sub_title = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
 
@@ -38,5 +38,5 @@ class Event(DateMixin):
         ordering = ["name"]
         verbose_name_plural = "Events"
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name

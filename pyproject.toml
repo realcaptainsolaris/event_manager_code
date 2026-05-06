@@ -1,0 +1,128 @@
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff]
+line-length = 88
+
+
+[tool.ruff.lint]
+# A = warn python keywords, ISC: implicit string concatenation
+# E Pycodestyle(PEP8), I: isort, D: pydocstyle (docstrings)
+# F (pyflakes)
+
+select = [
+  "E",
+  "I",
+  "A",
+  "D",
+  #"F"
+  # "ISC",
+] # Pyflakes (F)
+exclude = ["*/tests/*", "*/migrations/*", "build/"]
+
+# W503 und W504 sind in ruff (noch) nicht implementiert (21.06.2024)
+ignore = [
+  "N806",
+  "F402",
+  "F405",
+  "F403",
+  "C408",
+  "C416",
+  "T201",
+  "SIM102",
+  #### modules
+  "ANN", # flake8-annotations
+  "COM", # flake8-commas
+  "C90", # mccabe complexity
+  "DJ",  # django
+  "EXE", # flake8-executable
+  "T10", # debugger
+  "TID", # flake8-tidy-imports
+
+  #### specific rules
+  "D100",   # ignore missing docs
+  "D101",
+  "D102",
+  "D103",
+  "D104",
+  "D105",
+  "D106",
+  "D107",
+  "D200",
+  "D205",
+  "D212",
+  "D400",
+  "D401",
+  "D415",
+  "E402",   # false positives for local imports
+  "TRY003", # external messages in exceptions are too verbose
+  "TD002",
+  "TD003",
+  "FIX002", # too verbose descriptions of todos
+]
+
+[tool.ruff.format]
+docstring-code-format = true
+docstring-code-line-length = 72
+
+[tool.pyright]
+typeCheckingMode = "basic"
+ignoreMissingImports = true
+
+reportReturnType = "none"
+reportAttributeAccessIssue = "none"
+reportGeneralTypeIssues = "none"
+reportOptionalMemberAccess = "none"
+reportOptionalCall = "none"
+reportOptionalSubscript = "none"
+reportMissingImports = "none"
+reportMissingTypeStubs = "none"
+reportTypedDictNotRequiredAccess = "none"
+reportMissingModuleSource = "none"
+
+# DAS willst du behalten
+reportArgumentType = "error"
+
+[tool.bandit]
+exclude_dirs = ["tests", "migrations"]
+tests = ["B201", "B301"]
+skips = ["B101", "B601"]
+
+[tool.ruff.lint.isort]
+
+known-first-party = []            # alle eigenen Pakete
+force-sort-within-sections = true # optional, hält 'import' & 'from' zusammen
+
+section-order = [
+  "future",
+  "standard-library",
+  "third-party",
+  "first-party",
+  "local-folder",
+]
+
+
+[tool.mypy]
+follow_imports = "silent"
+warn_return_any = false
+warn_unused_configs = true
+ignore_missing_imports = true
+check_untyped_defs = false
+disallow_subclassing_any = false
+strict_optional = false
+no_implicit_optional = false
+disallow_incomplete_defs = true
+disallow_untyped_defs = false
+warn_no_return = false
+warn_unreachable = true
+exclude = ['env', '.env', '.git', 'tests', 'migrations']
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+django_settings_module = "config.settings"
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = "--reuse-db --create-db"
+DJANGO_SETTINGS_MODULE = "config.settings"
+testpaths = ["app/tests"]

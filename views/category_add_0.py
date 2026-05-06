@@ -1,5 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
+
 from .forms import CategoryForm
+from .models import Category, Event
 
 
 def category_create(request):

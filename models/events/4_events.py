@@ -1,6 +1,6 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
@@ -25,7 +25,7 @@ class Category(DateMixin):
         verbose_name = "Kategorie"
         verbose_name_plural = "Kategorien"
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
 
@@ -53,7 +53,7 @@ class Event(DateMixin):
     class Meta:
         ordering = ["name"]
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
     def related_events(self):

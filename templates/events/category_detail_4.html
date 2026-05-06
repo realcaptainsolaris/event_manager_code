@@ -12,11 +12,9 @@
 <h1 class="display-6 fw-bold lh-1">{{category.name}}</h1>
 <h3 class="display-6 lh-3">{{category.sub_title}}</h3>
 
-{% if user.is_authenticated %}
 <span style="font-size:12px;">
 <a href="{% url 'events:category-update' category.pk %}">editieren</a>
 </span>
-{% endif %}
 
 {% endblock %}
 
