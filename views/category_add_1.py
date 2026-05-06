@@ -8,15 +8,10 @@ def category_create(request):
 
     events/category/create
     """
-    if request.method == "POST":
-        form = CategoryForm(request.POST)
-        if form.is_valid():
-            category = form.save()
-            return redirect(category)
-    else:
-        form = CategoryForm()
-    return render(
-        request,
-        "events/category_create.html",
-        {"form": form},
-    )
+    form = CategoryForm(request.POST or None, request.FILES or None)
+
+    if form.is_valid():
+        category = form.save()
+        return redirect(category)
+
+    return render(request, "events/category_create.html", {"form": form})

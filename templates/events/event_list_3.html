@@ -13,7 +13,7 @@ Event Übersicht
 
 <ul class="list-group event_box">
 {% for event in object_list %}
-    <a href="{% url 'events:event_detail' event.pk %}">
+    <a href="{% url 'events:event-detail' event.pk %}">
 
     <li class="list-group-item rounded">
     <small><span>am {{event.date}}</span></small><br>

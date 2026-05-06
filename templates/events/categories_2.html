@@ -15,7 +15,7 @@
 <ul class="list-group event_box">
 {% for category in categories %}
 
-<a href="{% url 'events:category_detail' category.pk %}">
+<a href="{% url 'events:category-detail' category.pk %}">
 <li class="list-group-item rounded">
     {{category}}
     <span class="badge rounded-pill bg-primary">{{category.num_of_events}}</span>
@@ -25,7 +25,7 @@
 </ul>
 
 <p>
-<a href="{% url 'events:category_create' %}">neue Kategorie hinzufügen</a>
+<a href="{% url 'events:category-create' %}">neue Kategorie hinzufügen</a>
 </p>
 </div>
 </div>

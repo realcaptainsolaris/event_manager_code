@@ -12,7 +12,7 @@ def category_create(request):
         form = CategoryForm(request.POST or None)
         if form.is_valid():
             category = form.save()
-            return redirect("events:category_detail", pk=category.pk)
+            return redirect("events:category-detail", pk=category.pk)
     else:
         form = CategoryForm()
     return render(

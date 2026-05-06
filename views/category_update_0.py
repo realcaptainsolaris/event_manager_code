@@ -9,7 +9,7 @@ def category_update(request, pk):
 
     if form.is_valid():
         category = form.save()
-        return redirect("events:category_detail", pk=category.pk)
+        return redirect("events:category-detail", pk=category.pk)
 
     return render(
         request,

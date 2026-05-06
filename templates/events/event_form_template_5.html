@@ -12,14 +12,14 @@
 {% block head %}
 {% if object %}
     <p>
-    <a href="{% url 'events:event_detail' object.pk %}">zurück zum Event</a><br>
+    <a href="{% url 'events:event-detail' object.pk %}">zurück zum Event</a><br>
     </p>
 
     <h1 class="display-6 fw-bold lh-1">{{object.name}}</h1>
     
 {% else %}
     <p>
-    <a href="{% url 'events:events' %}">zurück zur Übersicht</a><br>
+    <a href="{% url 'events:event-list' %}">zurück zur Übersicht</a><br>
     </p>
 
     <h1 class="display-5 fw-bold lh-1">Event in {{category}} eintragen</h1>

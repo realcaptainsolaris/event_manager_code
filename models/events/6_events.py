@@ -38,7 +38,7 @@ class Category(DateMixin):
 
     def get_absolute_url(self):
         """Die URL für die Detailansicht einer Kategorie."""
-        return reverse("events:category_detail", args=[str(self.pk)])
+        return reverse("events:category-detail", args=[str(self.pk)])
 
 
 class Event(DateMixin):
@@ -88,7 +88,7 @@ class Event(DateMixin):
 
     def get_absolute_url(self):
         """Die URL für die Detailansicht eines Events."""
-        return reverse("events:event_detail", args=[str(self.pk)])
+        return reverse("events:event-detail", args=[str(self.pk)])
 
 
 class Review(DateMixin):
